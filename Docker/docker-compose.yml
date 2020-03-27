@@ -1,0 +1,21 @@
+version: '2.3'
+services:
+  tensorboard:
+    build: .
+    ports:
+      - 8080
+    shm_size: 23g
+    volumes:
+      - ../:/work
+    working_dir: /work
+    runtime: nvidia
+    tty: true
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=0
+    command: >
+      jupyter-lab
+      --no-browser
+      --port=8080
+      --ip=0.0.0.0
+      --allow-root
+      --NotebookApp.token=''
